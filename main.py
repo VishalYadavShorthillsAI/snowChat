@@ -83,9 +83,9 @@ for message in st.session_state.messages:
         True if message["role"] == "data" else False,
     )
 
-callback_handler = StreamlitUICallbackHandler()
+# callback_handler = StreamlitUICallbackHandler()
 
-chain = load_chain(st.session_state["model"], callback_handler)
+chain = load_chain(st.session_state["model"])
 
 
 def append_chat_history(question, answer):
@@ -103,9 +103,9 @@ def append_message(content, role="assistant", display=False):
     if role != "data":
         append_chat_history(st.session_state.messages[-2]["content"], content)
 
-    if callback_handler.has_streaming_ended:
-        callback_handler.has_streaming_ended = False
-        return
+    # if callback_handler.has_streaming_ended:
+    #     callback_handler.has_streaming_ended = False
+    #     return
 
 
 def handle_sql_exception(query, conn, e, retries=2):
